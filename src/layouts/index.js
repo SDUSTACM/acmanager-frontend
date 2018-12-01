@@ -1,5 +1,13 @@
 import styles from './index.css';
+import SiderBarLayout from './SiderBarLayout';
 
+
+function GlobalLayout(props) {
+  if (props.location.pathname === '/admin') {
+    return <SiderBarLayout {...props} />;
+  }
+  return BasicLayout(props);
+}
 function BasicLayout(props) {
   return (
     <div className={styles.normal}>
@@ -9,4 +17,4 @@ function BasicLayout(props) {
   );
 }
 
-export default BasicLayout;
+export default GlobalLayout;
