@@ -1,8 +1,10 @@
 import React from 'react';
+import { connect } from "dva";
 import { findDOMNode } from 'react-dom';
 import TweenOne from 'rc-tween-one';
 import { Menu, Icon } from 'antd';
-
+import router from 'umi/router';
+ 
 const { Item, SubMenu } = Menu;
 
 class Header extends React.Component {
@@ -13,7 +15,11 @@ class Header extends React.Component {
       menuHeight: 0,
     };
   }
-
+  componentDidMount() {
+    this.props.dispatch({
+      type: 'user/session'
+    });
+  }
   phoneClick = () => {
     const menu = findDOMNode(this.menu);
     const phoneOpen = !this.state.phoneOpen;
@@ -22,12 +28,13 @@ class Header extends React.Component {
       menuHeight: phoneOpen ? menu.scrollHeight : 0,
     });
   };
-
+  
   render() {
     const { ...props } = this.props;
-    const { dataSource, isMobile } = props;
+    const { dataSource, isMobile, dispatch } = props;
     delete props.dataSource;
     delete props.isMobile;
+    delete props.dispatch;
     const { menuHeight, phoneOpen } = this.state;
     const navData = dataSource.Menu.children;
     const navChildren = Object.keys(navData).map((key, i) => (
@@ -53,7 +60,7 @@ class Header extends React.Component {
             alt="img"
           />
         </span>
-        <span>用户名</span>
+        <span>{this.props.user.username?this.props.user.nick: "未登录"}</span>
       </div>
     );
     navChildren.push(
@@ -61,11 +68,16 @@ class Header extends React.Component {
         <Icon type="question-circle-o" />
         <span>{dataSource.help.children}</span>
       </Item>,
+      this.props.user.username?(
       <SubMenu className="user" title={userTitle} key="user">
         <Item key="a">用户中心</Item>
         <Item key="b">修改密码</Item>
-        <Item key="c">登出</Item>
-      </SubMenu>
+        <Item key="c" onClick={() => this.props.dispatch({ type: "user/logout" })}>登出</Item>
+      </SubMenu>):
+      (<SubMenu  className="user" title={userTitle} key="user">
+        <Item key="a" onClick={() => router.push("/login") } >登录</Item>
+      </SubMenu>)
+
     );
     return (
       <TweenOne
@@ -122,5 +134,17 @@ class Header extends React.Component {
     );
   }
 }
-
-export default Header;
+function mapStateToProps(state) {
+  let { username, nick, role } = state.user;
+  return {
+    user: {
+      username, nick, role
+    }
+  };
+}
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch: dispatch
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
