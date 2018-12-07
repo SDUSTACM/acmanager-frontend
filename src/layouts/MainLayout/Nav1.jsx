@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from "dva";
 import { findDOMNode } from 'react-dom';
 import TweenOne from 'rc-tween-one';
-import { Menu, Icon } from 'antd';
+import { Menu, Icon, Badge, Popover } from 'antd';
 import router from 'umi/router';
- 
+import Notification from './NotificationMenu';
 const { Item, SubMenu } = Menu;
 
 class Header extends React.Component {
@@ -41,7 +41,7 @@ class Header extends React.Component {
       <Item {...navData[key]} key={i.toString()}>
         <a
           {...navData[key].a}
-          href={navData[key].a.link}
+          onClick={() => router.push(navData[key].a.link)}
           target={navData[key].a.blank && '_blank'}
         >
           {navData[key].a.children}
@@ -65,8 +65,9 @@ class Header extends React.Component {
     );
     navChildren.push(
       <Item {...dataSource.help} key="help">
-        <Icon type="question-circle-o" />
-        <span>{dataSource.help.children}</span>
+
+        <Notification />
+        {/* <span>{dataSource.help.children}</span> */}
       </Item>,
       this.props.user.username?(
       <SubMenu className="user" title={userTitle} key="user">
@@ -123,7 +124,7 @@ class Header extends React.Component {
           >
             <Menu
               mode={isMobile ? 'inline' : 'horizontal'}
-              defaultSelectedKeys={['0']}
+              defaultSelectedKeys={[props.select_id]}
               theme={isMobile ? 'dark' : 'default'}
             >
               {navChildren}
@@ -137,6 +138,8 @@ class Header extends React.Component {
 function mapStateToProps(state) {
   let { username, nick, role } = state.user;
   return {
+    select_id: state.nav.select_id,
+
     user: {
       username, nick, role
     }

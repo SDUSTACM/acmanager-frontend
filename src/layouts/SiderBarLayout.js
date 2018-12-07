@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layout, Menu, Icon } from 'antd';
-
+import router from 'umi/router';
 const { Header, Sider, Content } = Layout;
 
 class SiderDemo extends React.Component {
@@ -24,10 +24,13 @@ class SiderDemo extends React.Component {
         >
           <div className="logo" />
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-            <Menu.Item key="1">
-              <Icon type="user" />
-              <span>nav 1</span>
-            </Menu.Item>
+            {this.props.menu_config.map((item, index) => (
+              <Menu.Item key={index} onClick={()=> router.push(item.target) }>
+                <Icon type={item.icon} />
+                <span>{item.title}</span>
+              </Menu.Item>
+            ))}
+            {/* 
             <Menu.Item key="2">
               <Icon type="video-camera" />
               <span>nav 2</span>
@@ -35,7 +38,7 @@ class SiderDemo extends React.Component {
             <Menu.Item key="3">
               <Icon type="upload" />
               <span>nav 3</span>
-            </Menu.Item>
+            </Menu.Item> */}
           </Menu>
         </Sider>
         <Layout>

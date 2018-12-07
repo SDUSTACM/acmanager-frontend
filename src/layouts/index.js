@@ -1,12 +1,17 @@
 import styles from './index.css';
-import SiderBarLayout from './SiderBarLayout';
-
+import AdminSiderBarLayout from './AdminSiderBarLayout';
+import UserSiderBarLayout from './UserSiderBarLayout';
+import MainLayout from './MainLayout';
 
 function GlobalLayout(props) {
-  if (props.location.pathname === '/admin') {
-    return <SiderBarLayout {...props} />;
+  if (props.location.pathname.startsWith('/admin')) {
+    return <AdminSiderBarLayout {...props} />;
+  } else if (props.location.pathname.startsWith('/setting')) {
+    return <UserSiderBarLayout {...props} />;
+  } else {
+    return <MainLayout {...props} />
   }
-  return BasicLayout(props);
+  // return BasicLayout(props);
 }
 function BasicLayout(props) {
   return (

@@ -1,5 +1,4 @@
 import LoginPage from './Login';
-// import styles from "./index.css";
 export default function() {
   return (
     <LoginPage />

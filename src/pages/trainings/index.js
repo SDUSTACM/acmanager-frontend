@@ -1,10 +1,11 @@
 import React from 'react';
+import styles from './trainings.css';
 import { Table, Divider, Tag } from 'antd';
 import { connect } from 'dva';
-import UpdatePage from './components/UpdateModal';
+// import UpdatePage from './components/UpdateModal';
 
 
-class UserList extends React.Component {
+class TrainingListPage extends React.Component {
     
     constructor(props) {
         super(props);
@@ -14,18 +15,22 @@ class UserList extends React.Component {
         }
     }
     columns = [{
-        title: '用户名',
-        dataIndex: 'username',
-        key: 'username',
+        title: '集训名',
+        dataIndex: 'name',
+        key: 'name',
         render: text => <a href="javascript:;">{text}</a>,
       }, {
-        title: '昵称',
-        dataIndex: 'nick',
-        key: 'nick',
+        title: '说明',
+        dataIndex: 'description',
+        key: 'description',
       }, {
-        title: '班级',
-        dataIndex: 'class_name',
-        key: 'class_name',
+        title: '创建者',
+        dataIndex: 'create_user',
+        key: 'create_user',
+      } ,{
+        title: '创建时间',
+        dataIndex: 'create_time',
+        key: 'create_time',
       } ,
       // , {
       //   title: 'Tags',
@@ -38,14 +43,14 @@ class UserList extends React.Component {
       //   ),
       // }, 
       {
-        title: 'Action',
+        title: '操作',
         key: 'action',
         render: (text, record) => (
           <span>
             <a href="javascript:;" onClick={() => this.setState({
                 visible: true,
                 select_data: record
-            })}>Edit</a>
+            })}>加入集训</a>
             <Divider type="vertical" />
             <a href="javascript:;">Delete</a>
           </span>
@@ -55,7 +60,7 @@ class UserList extends React.Component {
         return (
             <div>
                 <Table columns={this.columns} dataSource={this.props.data} />
-                <UpdatePage visible={this.state.visible}
+                {/* <UpdatePage visible={this.state.visible}
                 onClose={() => this.setState({
                     visible: false
                 })}
@@ -64,14 +69,14 @@ class UserList extends React.Component {
                     type: "users/update",
                     payload: {id: this.state.select_data.id, ...data}
                 })}
-                />
+                /> */}
             </div>
         );
     }
 }
 function mapStateToProps(state) {
     return {
-        data: state.users.user_list
+        data: state.trainings.training_list
     };
 }
-export default connect(mapStateToProps)(UserList);
+export default connect(mapStateToProps)(TrainingListPage);
