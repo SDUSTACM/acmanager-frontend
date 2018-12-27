@@ -15,10 +15,10 @@ function login({ username, password }) {
     });
 }
 function session() {
-    return request(`api/session/`);
+    return request(`/api/session/`);
 }
 function logout() {
-    return request(`api/logout/`);
+    return request(`/api/logout/`);
 }
 function register({ username, password, profile}) {
     let csrftoken = Cookies.get('csrftoken');

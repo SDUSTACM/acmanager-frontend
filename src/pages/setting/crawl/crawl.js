@@ -204,26 +204,26 @@ const WrappedRegistrationForm = Form.create({
     let data = {};
     if (props.data.length == 0) return data;
     for (let item of props.data) {
-      item[`${item.oj_name.toLowerCase()}.username`] = item.username;
-      item[`${item.oj_name.toLowerCase()}.password`] = item.password;
+      data[`${item.oj_name.toLowerCase()}.username`] = item["oj_username"];
+      data[`${item.oj_name.toLowerCase()}.password`] = item["oj_password"];
     }
     console.log(data);
     return {
       "uva.username": Form.createFormField({
         // ...props.data.username,
-        value: props.data.uva.username,
+        value: data["uva.username"],
       }),
       "uva.password": Form.createFormField({
         // ...props.data.username,
-        value: props.data.uva.password,
+        value: data["uva.password"],
       }),
       "vjudge.username": Form.createFormField({
         // ...props.data.username,
-        value: props.data.vjudge.username,
+        value: data["vjudge.username"],
       }),
       "vjudge.password": Form.createFormField({
         // ...props.data.username,
-        value: props.data.vjudge.password,
+        value: data["vjudge.password"],
       }),
     };
   }

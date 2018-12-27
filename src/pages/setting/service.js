@@ -25,7 +25,7 @@ function update_oj_account({username, data}) {
         body: JSON.stringify(data)
     })
 }
-function get_oj_account(username) {
+function get_oj_account({username}) {
     return request(`/api/crawl/oj_account/${username}/`, {
         method: "GET",
         headers: {

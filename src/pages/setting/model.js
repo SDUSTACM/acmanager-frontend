@@ -13,7 +13,7 @@ export default {
     setUserProfile(state, { payload: data }) {
       return { ...state, profile: data };
     },
-    setOJAccountList(state, {payload: data}) {
+    setOJAccountList(state, {payload: {data}}) {
       return { ...state, oj_account_list: data }
     }
   },
@@ -33,12 +33,16 @@ export default {
           console.log(e);
       }
     },
-    *get_oj_account({}, {call, put} ) {
+    *get_oj_account({}, {call, put, select, take } ) {
       try {
-        const data = yield call(Services.get_oj_account);
+        yield put({ type: 'user/session'});
+        yield take('user/session/@@end');
+        const username = yield select(state => state.user.username);
+        const data = yield call(Services.get_oj_account, {username});
+        console.log(data);
         yield put({ type: 'setOJAccountList', payload: { data } });
       } catch (e){
-          console.log(e);
+        console.log(e);
       }
     },
     *update_oj_account({ payload: { username, data } }, {call, put }) {
@@ -56,7 +60,9 @@ export default {
     setup({ dispatch, history }) {
       return history.listen(({ pathname, query }) => {
         if (pathname === '/setting/crawl') {
-          dispatch({ type: 'get_oj_account' });
+          dispatch({ type: 'get_oj_account'});
+        } else if (pathname === '/setting/profile') {
+          dispatch({ type: 'profile'});
         }
       });
     },
