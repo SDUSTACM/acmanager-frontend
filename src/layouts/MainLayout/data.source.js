@@ -11,7 +11,7 @@ export const Nav10DataSource = {
   Menu: {
     className: 'header1-menu',
     children: [
-      { name: 'item0', a: { children: '首页', link: '' } },
+      { name: 'item0', a: { children: '首页', link: '/' } },
       { name: 'item1', a: { children: '统计', link: 'statistic' } },
       { name: 'item2', a: { children: '集训', link: 'trainings' } },
       // { name: 'item3', a: { children: '导航四', link: '' } },
