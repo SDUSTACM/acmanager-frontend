@@ -20,40 +20,55 @@ class UserList extends React.Component {
         render: text => <a href="javascript:;">{text}</a>,
       }, {
         title: '申请人',
-        dataIndex: 'actor',
-        key: 'actor',
+        dataIndex: 'from_user',
+        key: 'from_user',
       }, {
         title: '申请角色',
-        dataIndex: 'verb',
-        key: 'verb',
+        dataIndex: 'object',
+        key: 'object',
         render: (text) => {
-            if (text === "APPLICATION-CONFIRM") {
+            if (text === "CONFIRM") {
                 return "认证用户";
             }
         }
       }, {
-        title: '状态',
-        dataIndex: 'class_name',
-        key: 'class_name',
-      }, {
         title: '申请时间',
-        dataIndex: 'timestamp',
-        key: 'timestamp',
+        dataIndex: 'timestramp',
+        key: 'timestramp',
       },
       {
         title: '操作',
         key: 'action',
-        render: (text, record) => (
-          <span>
-            <a href="javascript:;" onClick={() => this.setState({
-                visible: true,
-                select_data: record
-            })}>Edit</a>
+        render: (text, record) => {
+          const { status } = record;
+          if (status === "AGREE") {
+            return (<span>已同意</span>)
+          } else if (status == "REFUSE") {
+            return (<span>已拒绝</span>)
+          }
+          return (<span>
+            <a href="javascript:;" onClick={() => {
+                this.props.dispatch({
+                    type: 'message/verify', 
+                    payload: {
+                        id: record.id,
+                        status: "AGREE"
+                    }
+                })
+            }}>同意</a>
             <Divider type="vertical" />
-            <a href="javascript:;">Delete</a>
-          </span>
-        ),
-      }];
+            <a href="javascript:;" onClick={() => {
+                this.props.dispatch({
+                    type: 'message/verify', 
+                    payload: {
+                        id: record.id,
+                        status: "REFUSE"
+                    }
+                })
+            }} >拒绝</a>
+          </span>)
+        } 
+    }];
     render() {
         return (
             <div>

@@ -1,5 +1,6 @@
 import Services from './service';
 import router from 'umi/router';
+import { message } from 'antd';
 import { userInfo } from 'os';
 
 export default {
@@ -25,15 +26,13 @@ export default {
   effects: {
     *get_message_list({  }, { call, put }) {
       try {
-          const { all_list } = yield call(Services.get_application_message);
-          console.log(all_list);
-          let application_message_list = [];
-          for (let i = 0; i < all_list.length; i++) {
-            const { id, actor, verb, description, timestamp } = all_list[i];
-            if (verb.startsWith("APPLICATION")) {
-              application_message_list.push({id, actor, verb, description, timestamp});
-            }
-          }
+          const application_message_list = yield call(Services.get_application_message);
+          // for (let i = 0; i < all_list.length; i++) {
+          //   const { id, actor, verb, description, timestamp } = all_list[i];
+          //   if (verb.startsWith("APPLICATION")) {
+          //     application_message_list.push({id, actor, verb, description, timestamp});
+          //   }
+          // }
           yield put({ type: 'set_application_message_list', payload: { application_message_list } });
         //   router.push('/');
       } catch (e){
@@ -41,6 +40,15 @@ export default {
         //   yield put({ type: 'set_userLoginState', payload: { username, login_state: 0, message: e.message } });
       }
     },
+    *verify({ payload: { id, status }}, { call, put }) {
+      try {
+        yield call(Services.send_verify_message, {id, status});
+        message.success("操作成功");
+      } catch (e){
+        message.error("操作失败");  
+        console.log(e);
+      }
+    }
   },
 
   subscriptions: {
