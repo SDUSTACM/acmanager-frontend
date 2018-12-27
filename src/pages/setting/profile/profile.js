@@ -59,12 +59,14 @@ class ConfirmInput extends React.Component {
   }
 
   render() {
-    const { value } = this.props;
+    const { value, dispatch } = this.props;
     console.log(value);
     const state = this.state;
     const ConfirmApplication = (
       <span>未认证,
-      <a href="javascript:;" onClick={() => alert("认证成功")}>申请成为认证用户</a>
+      <a href="javascript:;" onClick={() => dispatch({
+        type: "application/confirm"
+      })}>申请成为认证用户</a>
       </span>
     )
     return (
@@ -180,7 +182,7 @@ class RegistrationForm extends React.Component {
           {getFieldDecorator('is_confirm', {
             rules: [{ required: true, message: 'Please input your nickname!', whitespace: true }],
           })(
-            <ConfirmInput />
+            <ConfirmInput dispatch={this.props.dispatch}/>
           )}
         </FormItem>
         <FormItem

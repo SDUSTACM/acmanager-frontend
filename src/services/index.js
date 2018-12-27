@@ -20,13 +20,16 @@ function session() {
 function logout() {
     return request(`api/logout/`);
 }
-function register({ username, password,  }) {
+function register({ username, password, profile}) {
+    let csrftoken = Cookies.get('csrftoken');
+
     return request(`api/register/`, {
         method: "post",
         headers: {
-            "content-type": "application/json"
-        },
-        body: JSON.stringify({ username, password })
+            'content-type': 'application/json',
+            'X-CSRFToken': csrftoken
+        },   
+        body: JSON.stringify({ username, password, profile })
     });
 }
 function audit_application({ identifier, username, is_approval }) {
@@ -50,4 +53,5 @@ export default {
     logout,
     get_notifications,
     audit_application,
+    register
 };

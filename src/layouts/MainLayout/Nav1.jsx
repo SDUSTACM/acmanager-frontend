@@ -52,14 +52,14 @@ class Header extends React.Component {
     // user 涉及到数据，请自行替换。
     const userTitle = (
       <div {...dataSource.user}>
-        <span className="img" {...dataSource.user.img}>
-          <img
+        {/* <span className="img" {...dataSource.user.img}>
+           <img
             src="https://zos.alipayobjects.com/rmsportal/iXsgowFDTJtGpZM.png"
             width="100%"
             height="100%"
             alt="img"
-          />
-        </span>
+          /> 
+        </span> */}
         <span>{this.props.user.username?this.props.user.nick: "未登录"}</span>
       </div>
     );
@@ -71,8 +71,8 @@ class Header extends React.Component {
       </Item>,
       this.props.user.username?(
       <SubMenu className="user" title={userTitle} key="user">
-        <Item key="a">用户中心</Item>
-        <Item key="b">修改密码</Item>
+        <Item key="a" onClick={() => router.push('/setting')}>用户中心</Item>
+        {/* <Item key="b">修改密码</Item> */}
         <Item key="c" onClick={() => this.props.dispatch({ type: "user/logout" })}>登出</Item>
       </SubMenu>):
       (<SubMenu  className="user" title={userTitle} key="user">

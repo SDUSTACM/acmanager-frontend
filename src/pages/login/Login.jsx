@@ -46,9 +46,9 @@ class NormalLoginForm extends React.Component {
           )}
           <a className={styles.login_form_forgot} href="">Forgot password</a>
           <Button type="primary" htmlType="submit" className={styles.login_form_button}>
-            Log in
+            登录
           </Button>
-          Or <a href="">register now!</a>
+          Or <a href="/register">现在注册!</a>
         </FormItem>
       </Form>
     );

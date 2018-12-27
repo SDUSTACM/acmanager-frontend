@@ -12,7 +12,7 @@ export const Nav10DataSource = {
       { name: 'item0', a: { children: '首页', href: '' } },
       { name: 'item1', a: { children: '统计', href: '' } },
       { name: 'item2', a: { children: '集训', href: '' } },
-      { name: 'item3', a: { children: '导航四', href: '' } },
+      // { name: 'item3', a: { children: '导航四', href: '' } },
     ],
   },
   mobileMenu: { className: 'header1-mobile-menu' },
@@ -28,7 +28,7 @@ export const Banner00DataSource = {
   },
   content: {
     className: 'banner0-content',
-    children: '一个高效的页面动画解决方案',
+    children: 'ACM集训队管理系统',
   },
   button: { className: 'banner0-button', children: 'Learn More' },
 };

@@ -1,4 +1,6 @@
 import React from 'react';
+import router from 'umi/router';
+
 export const Nav10DataSource = {
   wrapper: { className: 'header1 home-page-wrapper' },
   page: { className: 'home-page' },
@@ -10,9 +12,9 @@ export const Nav10DataSource = {
     className: 'header1-menu',
     children: [
       { name: 'item0', a: { children: '首页', link: '' } },
-      { name: 'item1', a: { children: '统计', link: '' } },
+      { name: 'item1', a: { children: '统计', link: 'statistic' } },
       { name: 'item2', a: { children: '集训', link: 'trainings' } },
-      { name: 'item3', a: { children: '导航四', link: '' } },
+      // { name: 'item3', a: { children: '导航四', link: '' } },
     ],
   },
   mobileMenu: { className: 'header1-mobile-menu' },

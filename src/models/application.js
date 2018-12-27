@@ -1,9 +1,10 @@
-import Services from '../services';
+import Services from '../services/application';
 import router from 'umi/router';
 import { userInfo } from 'os';
+import { message } from 'antd';
 
 export default {
-  namespace: 'user',
+  namespace: 'application',
   state: {
     username: null,
     role: null,
@@ -22,15 +23,14 @@ export default {
     }
   },
   effects: {
-    *login({ payload: { username, password } }, { call, put }) {
+    *confirm({}, { call, put }) {
       try {
-          console.log(username, password);
-          const { role } = yield call(Services.login, { username, password });
-          yield put({ type: 'setUserLoginState', payload: { username, role } });
-          router.push('/');
+          yield call(Services.application_confirm, {});
+          message.success('发送申请成功，请耐心等待审核结果!');
+        //   yield put({ type: 'setUserLoginState', payload: { username, role } });
       } catch (e){
           console.log(e);
-          yield put({ type: 'setUserLoginState', payload: { username, login_state: 0, message: e.message } });
+          message.success('发送失败！');
       }
     },
     *register({ payload: { username, password, profile } }, { call, put }) {

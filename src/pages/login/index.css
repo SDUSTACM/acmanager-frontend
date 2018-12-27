@@ -12,3 +12,10 @@
 .login_form_button {
   width: 100%;
 }
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-image: url('https://blogs.ethz.ch/acmicpc/files/2017/12/header-1.jpg')
+}

@@ -7,7 +7,11 @@ export default function(props) {
             "icon": "user"
         }, {
             "title": "集训管理",
-            "target": "",
+            "target": "/admin/training",
+            "icon": "user"
+        }, {
+            "title": "申请管理",
+            "target": "/admin/application",
             "icon": "user"
         }
     ];

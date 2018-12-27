@@ -41,13 +41,24 @@ class RegistrationForm extends React.Component {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
+        console.log('Received values of form: ', values);
+        let data = [];
+        const { username } = this.props;
+        for (let key of Object.keys(values)) {
+          data.push({
+            "oj_name": key.toUpperCase(),
+            "oj_username": values[key].username,
+            "oj_password": values[key].password
+          })
+        }
         this.props.dispatch({
-          type: "setting/update_profile",
+          type: "setting/update_oj_account",
           payload: {
-            ...values
+            username,
+            data: data
           }
         })
-        console.log('Received values of form: ', values);
+        console.log('convert to: ', data);
       }
     });
   }
@@ -122,7 +133,7 @@ class RegistrationForm extends React.Component {
             </span>
           )}
         >
-          {getFieldDecorator('uva_id', {
+          {getFieldDecorator('uva.username', {
             rules: [{ required: true, message: 'Please input your nickname!', whitespace: true }],
           })(
             <Input />
@@ -132,14 +143,48 @@ class RegistrationForm extends React.Component {
           {...formItemLayout}
           label={(
             <span>
-              Vjudge账号&nbsp;
+              UVA密码&nbsp;
               <Tooltip title="What do you want others to call you?">
                 <Icon type="question-circle-o" />
               </Tooltip>
             </span>
           )}
         >
-          {getFieldDecorator('vjudge_id', {
+          {getFieldDecorator('uva.password', {
+            rules: [{ required: true, message: 'Please input your nickname!', whitespace: true }],
+          })(
+            <Input />
+          )}
+        </FormItem>
+        <FormItem
+          {...formItemLayout}
+          label={(
+            <span>
+              Vjudge账号
+              <Tooltip title="What do you want others to call you?">
+                <Icon type="question-circle-o" />
+              </Tooltip>
+            </span>
+          )}
+        >
+          {getFieldDecorator('vjudge.username', {
+            rules: [{ required: true, message: 'Please input your nickname!', whitespace: true }],
+          })(
+            <Input />
+          )}
+        </FormItem>
+        <FormItem
+          {...formItemLayout}
+          label={(
+            <span>
+              Vjudge密码
+              <Tooltip title="What do you want others to call you?">
+                <Icon type="question-circle-o" />
+              </Tooltip>
+            </span>
+          )}
+        >
+          {getFieldDecorator('vjudge.password', {
             rules: [{ required: true, message: 'Please input your nickname!', whitespace: true }],
           })(
             <Input />
@@ -156,19 +201,29 @@ class RegistrationForm extends React.Component {
 const WrappedRegistrationForm = Form.create({
   mapPropsToFields(props) {
     console.log(props);
-    if (!props.data) return {};
+    let data = {};
+    if (props.data.length == 0) return data;
+    for (let item of props.data) {
+      item[`${item.oj_name.toLowerCase()}.username`] = item.username;
+      item[`${item.oj_name.toLowerCase()}.password`] = item.password;
+    }
+    console.log(data);
     return {
-      username: Form.createFormField({
+      "uva.username": Form.createFormField({
         // ...props.data.username,
-        value: props.data.username,
+        value: props.data.uva.username,
       }),
-      nick: Form.createFormField({
+      "uva.password": Form.createFormField({
         // ...props.data.username,
-        value: props.data.nick,
+        value: props.data.uva.password,
       }),
-      class_name: Form.createFormField({
+      "vjudge.username": Form.createFormField({
         // ...props.data.username,
-        value: props.data.class_name,
+        value: props.data.vjudge.username,
+      }),
+      "vjudge.password": Form.createFormField({
+        // ...props.data.username,
+        value: props.data.vjudge.password,
       }),
     };
   }
@@ -176,7 +231,8 @@ const WrappedRegistrationForm = Form.create({
 
 function mapStateToProps(state) {
   return {
-      data: state.setting.profile
+      username: state.user.username,
+      data: state.setting.oj_account_list
   };
 }
 export default connect(mapStateToProps)(WrappedRegistrationForm);
