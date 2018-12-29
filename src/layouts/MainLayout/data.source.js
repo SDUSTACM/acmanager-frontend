@@ -6,7 +6,7 @@ export const Nav10DataSource = {
   page: { className: 'home-page' },
   logo: {
     className: 'header1-logo',
-    children: 'https://os.alipayobjects.com/rmsportal/mlcYmsRilwraoAe.svg',
+    children: 'http://pkhnup3fo.bkt.clouddn.com/acmanager-logo.svg',
   },
   Menu: {
     className: 'header1-menu',
@@ -270,7 +270,7 @@ export const Footer10DataSource = {
         title: {
           className: 'logo',
           children:
-            'https://zos.alipayobjects.com/rmsportal/qqaimmXZVSwAhpL.svg',
+            'http://pkhnup3fo.bkt.clouddn.com/acmanager-logo.svg',
         },
         content: {
           className: 'slogan',
@@ -282,26 +282,22 @@ export const Footer10DataSource = {
         xs: 24,
         md: 6,
         className: 'block',
-        title: { children: '产品' },
+        title: { children: '关联站点' },
         content: {
           children: (
             <span>
               <p>
                 {' '}
-                <a href="#">产品更新记录</a>{' '}
+                <a href="#">历年算法竞赛榜单</a>{' '}
               </p>{' '}
               <p>
                 {' '}
-                <a href="#">API文档</a>{' '}
+                <a href="#">FTP资源站</a>{' '}
               </p>{' '}
               <p>
                 {' '}
-                <a href="#">快速入门</a>{' '}
+                <a href="#">算法WIKI</a>{' '}
               </p>{' '}
-              <p>
-                {' '}
-                <a href="#">参考指南</a>{' '}
-              </p>
             </span>
           ),
         },
@@ -332,25 +328,25 @@ export const Footer10DataSource = {
         xs: 24,
         md: 6,
         className: 'block',
-        title: { children: '资源' },
+        title: { children: '常用链接' },
         content: {
           children: (
             <span>
               <p>
                 {' '}
-                <a href="#">Ant Design</a>{' '}
+                <a target="_blank" href="https://cn.vjudge.net">Vjudge</a>{' '}
               </p>{' '}
               <p>
                 {' '}
-                <a href="#">Ant Design</a>{' '}
+                <a target="_blank" href="http://poj.org">POJ</a>{' '}
               </p>{' '}
               <p>
                 {' '}
-                <a href="#">Ant Design</a>{' '}
+                <a target="_blank" href="http://acmicpc.info/">ACM/ICPC信息站</a>{' '}
               </p>{' '}
               <p>
                 {' '}
-                <a href="#">Ant Design</a>{' '}
+                {/* <a href="#">Ant Design</a>{' '} */}
               </p>
             </span>
           ),
@@ -364,7 +360,7 @@ export const Footer10DataSource = {
     className: 'copyright',
     children: (
       <span>
-        ©2018 by <a href="https://motion.ant.design">Ant Motion</a> All Rights
+        ©2018 by sdkdACM team All Rights
         Reserved
       </span>
     ),

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'dva';
 import { Tabs, Icon, Badge, Popover, List } from 'antd';
+import router from 'umi/router';
 
 const TabPane = Tabs.TabPane;
 
@@ -40,15 +41,23 @@ class NotificationMenu extends React.Component{
     );
   }
 }
+// function Notification(props) {
+//   return (
+//       <Popover placement="topRight" content={<NotificationMenu dispatch = {props.dispatch } notification_list={props.notification_list} />} trigger="click">
+//         <Badge count={0} overflowCount={100} onClick={() => props.dispatch({
+//           type: 'notifications/get'
+//         })}>
+//           <Icon type="notification" />
+//         </Badge>
+//       </Popover>
+//   );
+// }
+
 function Notification(props) {
   return (
-      <Popover placement="topRight" content={<NotificationMenu dispatch = {props.dispatch } notification_list={props.notification_list} />} trigger="click">
-        <Badge count={99} overflowCount={100} onClick={() => props.dispatch({
-          type: 'notifications/get'
-        })}>
-          <Icon type="notification" />
-        </Badge>
-      </Popover>
+    <div onClick={() => router.push('/message')}>
+      <Icon type="notification" />
+    </div>
   );
 }
 function mapStateToProps(state) {
