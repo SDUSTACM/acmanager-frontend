@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'dva';
 import { Layout, Menu, Icon } from 'antd';
 import router from 'umi/router';
 import Nav1 from './MainLayout/Nav1';
@@ -7,6 +8,7 @@ import { enquireScreen } from 'enquire-js';
 import {
   Nav10DataSource,
 } from './MainLayout/data.source';
+import { select } from 'redux-saga/effects';
 const { Header, Sider, Content } = Layout;
 
 let isMobile;
@@ -69,7 +71,7 @@ class SiderDemo extends React.Component {
             collapsed={this.state.collapsed}
           >
             <div className="logo" />
-            <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+            <Menu theme="dark" mode="inline" defaultSelectedKeys={[this.props.select_id]}>
               {this.props.menu_config.map((item, index) => (
                 <Menu.Item key={index} onClick={()=> router.push(item.target) }>
                   <Icon type={item.icon} />
@@ -104,5 +106,18 @@ class SiderDemo extends React.Component {
     );
   }
 }
-
-export default SiderDemo;
+function mapStateToProps(state) {
+  const sider_type = state.routing.location.pathname;
+  let select_id = '0';
+  if (sider_type.startsWith('/setting/')) {
+    select_id = state.setting.select_id;
+  } else if (sider_type.startsWith('/admin/')){
+    select_id = state.admin.select_id;
+  } else if (sider_type.startsWith('/message')) {
+    select_id = state.message.select_id;
+  }
+  return {
+    select_id: select_id
+  };
+}
+export default connect(mapStateToProps)(SiderDemo);

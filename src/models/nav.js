@@ -20,7 +20,11 @@ export default {
     setup({ dispatch, history }) {
       return history.listen(({ pathname, query }) => {
         if (pathname === '/trainings') {
-          dispatch({ type: 'setSelectItemId', payload: { select_id: '2'} });
+          dispatch({ type: 'setSelectItemId', payload: { select_id: '2' } });
+        } else if (pathname === '/statistic') {
+          dispatch({ type: 'setSelectItemId', payload: { select_id: '1' } });
+        } else if (pathname === '/message') {
+          dispatch({ type: 'setSelectItemId', payload: { select_id: '3' } });
         }
       });
     },

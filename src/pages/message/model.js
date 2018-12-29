@@ -6,7 +6,8 @@ import { userInfo } from 'os';
 export default {
   namespace: 'message',
   state: {
-    application_message_list: []
+    application_message_list: [],
+    select_id: '0',
     // username: null,
     // role: null,
     // login_state: null,
@@ -19,6 +20,9 @@ export default {
     //   message = message || "登录成功";
     //   return { ...state, username, role, login_state, message };
     // },
+    setSelectItemId(state, { payload: { select_id } }) {
+      return { ...state, select_id };
+    },
     set_application_message_list(state, { payload: { application_message_list }}) {
       return { ...state, application_message_list };
     }
@@ -57,6 +61,16 @@ export default {
         if (pathname.startsWith('/message/')) {
           dispatch({ type: 'get_message_list' });
         }
+
+        if (pathname === '/message/application') {
+          dispatch({ type: 'setSelectItemId', payload: { select_id: '0' } });
+        } 
+        // else if (pathname === '/setting/crawl') {
+        //   dispatch({ type: 'setSelectItemId', payload: { select_id: '1' } });
+        // } else if (pathname === '/setting/repassword') {
+        //   dispatch({ type: 'setSelectItemId', payload: { select_id: '2' } });
+        // }
+
       });
     },
   },

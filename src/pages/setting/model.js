@@ -7,7 +7,8 @@ export default {
   namespace: 'setting',
   state: {
     profile: null,
-    oj_account_list: []
+    oj_account_list: [],
+    select_id: '0',
   },
   reducers: {
     setUserProfile(state, { payload: data }) {
@@ -15,7 +16,10 @@ export default {
     },
     setOJAccountList(state, {payload: {data}}) {
       return { ...state, oj_account_list: data }
-    }
+    },
+    setSelectItemId(state, { payload: { select_id } }) {
+      return { ...state, select_id };
+    },
   },
   effects: {
     *update_profile({ payload: { nick, class_name } }, { call, put }) {
@@ -63,6 +67,14 @@ export default {
           dispatch({ type: 'get_oj_account'});
         } else if (pathname === '/setting/profile') {
           dispatch({ type: 'profile'});
+        }
+
+        if (pathname === '/setting/profile') {
+          dispatch({ type: 'setSelectItemId', payload: { select_id: '0' } });
+        } else if (pathname === '/setting/crawl') {
+          dispatch({ type: 'setSelectItemId', payload: { select_id: '1' } });
+        } else if (pathname === '/setting/repassword') {
+          dispatch({ type: 'setSelectItemId', payload: { select_id: '2' } });
         }
       });
     },
