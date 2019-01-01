@@ -1,5 +1,6 @@
 import Services from '../services';
 import router from 'umi/router';
+import { message } from 'antd';
 import { userInfo } from 'os';
 
 export default {
@@ -29,7 +30,8 @@ export default {
           yield put({ type: 'setUserLoginState', payload: { username, role } });
           router.push('/');
       } catch (e){
-          console.log(e);
+          // TODO: 更加精细的错误处理          
+          message.error("登录失败，请检查用户名或者密码是否有误，或者网络连接是否有效。");
           yield put({ type: 'setUserLoginState', payload: { username, login_state: 0, message: e.message } });
       }
     },
