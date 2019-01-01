@@ -7,29 +7,7 @@ const FormItem = Form.Item;
 const Option = Select.Option;
 const AutoCompleteOption = AutoComplete.Option;
 
-const residences = [{
-  value: 'zhejiang',
-  label: 'Zhejiang',
-  children: [{
-    value: 'hangzhou',
-    label: 'Hangzhou',
-    children: [{
-      value: 'xihu',
-      label: 'West Lake',
-    }],
-  }],
-}, {
-  value: 'jiangsu',
-  label: 'Jiangsu',
-  children: [{
-    value: 'nanjing',
-    label: 'Nanjing',
-    children: [{
-      value: 'zhonghuamen',
-      label: 'Zhong Hua Men',
-    }],
-  }],
-}];
+
 class ConfirmInput extends React.Component {
   // static getDerivedStateFromProps(nextProps) {
   //   // Should be a controlled component.
@@ -134,23 +112,25 @@ class RegistrationForm extends React.Component {
 
     const formItemLayout = {
       labelCol: {
-        xs: { span: 4 },
-        sm: { span: 4 },
+        xs: { span: 6 },
+        sm: { span: 8 },
+        md: { span: 8, },
       },
       wrapperCol: {
-        xs: { span: 4 },
-        sm: { span: 4 },
+        xs: { span: 6 },
+        sm: { span: 16 },
+        md: { span: 8 },
       },
     };
     const tailFormItemLayout = {
       wrapperCol: {
         xs: {
-          span: 8,
+          span: 24,
           offset: 0,
         },
         sm: {
-          span: 16,
-          offset: 8,
+          span: 4,
+          offset: 10,
         },
       },
     };

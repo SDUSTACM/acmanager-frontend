@@ -45,10 +45,12 @@ class RegistrationForm extends React.Component {
         let data = [];
         const { username } = this.props;
         for (let key of Object.keys(values)) {
+          const [ oj_name, oj_username, oj_password ] = [key.toUpperCase(), values[key].username, values[key].password];
+          if (oj_username == null || oj_username === "") continue;
           data.push({
-            "oj_name": key.toUpperCase(),
-            "oj_username": values[key].username,
-            "oj_password": values[key].password
+            "oj_name": oj_name,
+            "oj_username": oj_username,
+            "oj_password": oj_password || null
           })
         }
         this.props.dispatch({
@@ -100,23 +102,25 @@ class RegistrationForm extends React.Component {
 
     const formItemLayout = {
       labelCol: {
-        xs: { span: 4 },
-        sm: { span: 4 },
+        xs: { span: 6 },
+        sm: { span: 8 },
+        md: { span: 8, },
       },
       wrapperCol: {
-        xs: { span: 4 },
-        sm: { span: 4 },
+        xs: { span: 6 },
+        sm: { span: 16 },
+        md: { span: 8 },
       },
     };
     const tailFormItemLayout = {
       wrapperCol: {
         xs: {
-          span: 8,
+          span: 24,
           offset: 0,
         },
         sm: {
-          span: 16,
-          offset: 8,
+          span: 4,
+          offset: 10,
         },
       },
     };
@@ -127,14 +131,14 @@ class RegistrationForm extends React.Component {
           label={(
             <span>
               UVA账号&nbsp;
-              <Tooltip title="What do you want others to call you?">
+              <Tooltip title="请输出UVA ID">
                 <Icon type="question-circle-o" />
               </Tooltip>
             </span>
           )}
         >
           {getFieldDecorator('uva.username', {
-            rules: [{ required: true, message: 'Please input your nickname!', whitespace: true }],
+            rules: [{ required: false, message: 'Please input your nickname!', whitespace: true }],
           })(
             <Input />
           )}
@@ -144,7 +148,7 @@ class RegistrationForm extends React.Component {
           label={(
             <span>
               UVA密码&nbsp;
-              <Tooltip title="What do you want others to call you?">
+              <Tooltip title="请输出UVA 密码">
                 <Icon type="question-circle-o" />
               </Tooltip>
             </span>
@@ -153,7 +157,7 @@ class RegistrationForm extends React.Component {
           {getFieldDecorator('uva.password', {
             rules: [{ required: false, message: 'Please input your nickname!', whitespace: true }],
           })(
-            <Input />
+            <Input placeholder="UVA密码可以不填"/>
           )}
         </FormItem>
         <FormItem
@@ -161,14 +165,14 @@ class RegistrationForm extends React.Component {
           label={(
             <span>
               Vjudge账号
-              <Tooltip title="What do you want others to call you?">
+              <Tooltip title="请输出Vjudge账号">
                 <Icon type="question-circle-o" />
               </Tooltip>
             </span>
           )}
         >
           {getFieldDecorator('vjudge.username', {
-            rules: [{ required: true, message: 'Please input your nickname!', whitespace: true }],
+            rules: [{ required: false, message: 'Please input your nickname!', whitespace: true }],
           })(
             <Input />
           )}
@@ -178,16 +182,16 @@ class RegistrationForm extends React.Component {
           label={(
             <span>
               Vjudge密码
-              <Tooltip title="What do you want others to call you?">
+              <Tooltip title="请输出Vjudge密码">
                 <Icon type="question-circle-o" />
               </Tooltip>
             </span>
           )}
         >
           {getFieldDecorator('vjudge.password', {
-            rules: [{ required: false, message: 'Please input your nickname!', whitespace: true }],
+            rules: [{ required: false, message: '请输入Vjudge密码', whitespace: true }],
           })(
-            <Input />
+            <Input placeholder="Vjudge密码可以不填"/>
           )}
         </FormItem>
         <FormItem {...tailFormItemLayout}>
