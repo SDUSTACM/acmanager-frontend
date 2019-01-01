@@ -13,23 +13,25 @@ class Index extends React.Component {
     }
     render() {
         return (
-            <Card title="公告">
-                <List
-                    // header={<div>Header</div>}
-                    // footer={<div>Footer</div>}
-                    bordered
-                    dataSource={data}
-                    renderItem={item => (
-                        <List.Item>
-                            <Row style={{width:'100%'}}>
-                                <Col span={16}>{item.title}</Col>
-                                <Col span={4}>{item.time}</Col>
-                                <Col span={4}>{item.author}</Col>
-                            </Row>
-                        </List.Item>
-                    )}
-                    />
-            </Card>            
+            <Card>
+                <Card title="公告">
+                    <List
+                        // header={<div>Header</div>}
+                        // footer={<div>Footer</div>}
+                        bordered
+                        dataSource={data}
+                        renderItem={item => (
+                            <List.Item>
+                                <Row style={{width:'100%'}}>
+                                    <Col span={16}>{item.title}</Col>
+                                    <Col span={4}>{item.time}</Col>
+                                    <Col span={4}>{item.author}</Col>
+                                </Row>
+                            </List.Item>
+                        )}
+                        />
+                </Card>
+            </Card>         
         );
     }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './statistic.css';
 import router from 'umi/router';
-import { Table, Divider, Tag } from 'antd';
+import { Table, Card, Tag } from 'antd';
 import { connect } from 'dva';
 // import UpdatePage from './components/UpdateModal';
 import { Tabs } from 'antd';
@@ -45,24 +45,9 @@ class TrainingListPage extends React.Component {
         // console.log(data);
         // console.log(list_data);
         return (
-          <Tabs defaultActiveKey="1" onChange={this.callback}>
-            <TabPane tab="题数视图" key="1">
-            <Tabs
-              defaultActiveKey="1"
-              tabPosition="left"
-              // style={{ height: 220 }}
-            >
-              {this.props.oj_id_list.map((item, index) => {
-                
-                return (
-                <TabPane tab={this.props.oj_id_to_title[item]} key={index}>
-                  <Table columns={this.columns} dataSource={this.props.data[item]} />
-                </TabPane>);
-              })}
-            </Tabs>
-              {/*  */}
-            </TabPane>
-            <TabPane tab="平均分视图" key="2">
+          <Card>
+            <Tabs defaultActiveKey="1" onChange={this.callback}>
+              <TabPane tab="题数视图" key="1">
               <Tabs
                 defaultActiveKey="1"
                 tabPosition="left"
@@ -72,13 +57,14 @@ class TrainingListPage extends React.Component {
                   
                   return (
                   <TabPane tab={this.props.oj_id_to_title[item]} key={index}>
-                    <Table columns={this.columns} dataSource={this.props.data_score[item]} />
+                    <Table columns={this.columns} dataSource={this.props.data[item]} />
                   </TabPane>);
                 })}
               </Tabs>
-            </TabPane>
-            <TabPane tab="总分视图" key="3">
-              <Tabs
+                {/*  */}
+              </TabPane>
+              <TabPane tab="平均分视图" key="2">
+                <Tabs
                   defaultActiveKey="1"
                   tabPosition="left"
                   // style={{ height: 220 }}
@@ -87,12 +73,28 @@ class TrainingListPage extends React.Component {
                     
                     return (
                     <TabPane tab={this.props.oj_id_to_title[item]} key={index}>
-                      <Table columns={this.columns} dataSource={this.props.data_ave_score[item]} />
+                      <Table columns={this.columns} dataSource={this.props.data_score[item]} />
                     </TabPane>);
                   })}
                 </Tabs>
-            </TabPane>
-          </Tabs>
+              </TabPane>
+              <TabPane tab="总分视图" key="3">
+                <Tabs
+                    defaultActiveKey="1"
+                    tabPosition="left"
+                    // style={{ height: 220 }}
+                  >
+                    {this.props.oj_id_list.map((item, index) => {
+                      
+                      return (
+                      <TabPane tab={this.props.oj_id_to_title[item]} key={index}>
+                        <Table columns={this.columns} dataSource={this.props.data_ave_score[item]} />
+                      </TabPane>);
+                    })}
+                  </Tabs>
+              </TabPane>
+            </Tabs>
+          </Card>
         );
     }
 }

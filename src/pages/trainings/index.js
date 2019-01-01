@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './trainings.css';
-import { Table, Divider, Tag } from 'antd';
+import { Table, Divider, Tag, Card } from 'antd';
 import { connect } from 'dva';
 // import UpdatePage from './components/UpdateModal';
 
@@ -58,7 +58,7 @@ class TrainingListPage extends React.Component {
       }];
     render() {
         return (
-            <div>
+            <Card>
                 <Table columns={this.columns} dataSource={this.props.data} />
                 {/* <UpdatePage visible={this.state.visible}
                 onClose={() => this.setState({
@@ -70,7 +70,7 @@ class TrainingListPage extends React.Component {
                     payload: {id: this.state.select_data.id, ...data}
                 })}
                 /> */}
-            </div>
+            </Card>
         );
     }
 }
