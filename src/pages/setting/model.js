@@ -22,6 +22,15 @@ export default {
     },
   },
   effects: {
+    *reset_password({ payload: { old_password, new_password} }, { call, put }) {
+      try {
+        yield call(Services.reset_password, { old_password, new_password });
+        message.success("修改成功,即将返回到登录页");
+        router.push("/login");
+      } catch (e) {
+        message.error("修改失败，可能是原密码输入错误");
+      }
+    },
     *update_profile({ payload: { nick, class_name } }, { call, put }) {
       try {
           yield call(Services.update_user_profile, { nick, class_name });

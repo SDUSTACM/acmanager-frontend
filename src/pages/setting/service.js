@@ -25,6 +25,17 @@ function update_oj_account({username, data}) {
         body: JSON.stringify(data)
     })
 }
+function reset_password({old_password, new_password}) {
+    let csrftoken = Cookies.get('csrftoken');
+    return request(`/api/resetpassword/`, {
+        method: "POST",
+        headers: {
+            'content-type': 'application/json',
+            'X-CSRFToken': csrftoken
+        },   
+        body: JSON.stringify({old_password, new_password})
+    })
+}
 function get_oj_account({username}) {
     return request(`/api/crawl/oj_account/${username}/`, {
         method: "GET",
@@ -38,4 +49,5 @@ export default {
     get_user_profile,
     update_oj_account,
     get_oj_account,
+    reset_password
 };
