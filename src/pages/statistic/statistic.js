@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './statistic.css';
+import router from 'umi/router';
 import { Table, Divider, Tag } from 'antd';
 import { connect } from 'dva';
 // import UpdatePage from './components/UpdateModal';
@@ -21,7 +22,9 @@ class TrainingListPage extends React.Component {
         title: '用户名',
         dataIndex: 'nick',
         key: 'nick',
-        render: text => <a href="javascript:;">{text}</a>,
+        render: (text, row) => (
+          <a href="javascript:;" onClick={() => router.push(`/statistic/${row.username}`)}>{text}</a>
+          )
       }, {
         title: '班级',
         dataIndex: 'class_name',

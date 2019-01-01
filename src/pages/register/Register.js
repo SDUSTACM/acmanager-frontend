@@ -122,7 +122,7 @@ class RegistrationForm extends React.Component {
         >
           {getFieldDecorator('profile.email', {
             rules: [{
-              required: true, message: '请输入邮箱',
+              required: false, message: '请输入邮箱',
             }],
           })(
             <Input />

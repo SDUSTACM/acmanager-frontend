@@ -7,6 +7,35 @@ import router from 'umi/router';
 import Notification from './NotificationMenu';
 const { Item, SubMenu } = Menu;
 
+/**
+ * 高阶组件，用来赋予Item根据用户角色来选择性呈现的能力
+ */
+function WithRolePermission(WrappedComponent) {
+  return (
+    connect((state) => {
+      return { roles: state.user.roles };
+    })(
+    class extends React.Component {
+      constructor(props) {
+        super(props);
+      } 
+      render() {
+        const { allow_roles, roles } = this.props;
+        /** some, every, map, forEach, find, filter */
+        if (roles.some((v) => allow_roles.includes(v))) {
+          return (
+              <WrappedComponent {...this.props} />
+          );
+        } 
+        return (<div></div>);
+      }
+    })    
+  )
+}
+const RoleItem = WithRolePermission(Item);
+RoleItem.defaultProps = {
+  allow_roles: ['EVERYBODY']
+};
 class Header extends React.Component {
   constructor(props) {
     super(props);
@@ -71,8 +100,11 @@ class Header extends React.Component {
       </Item>,
       this.props.user.username?(
       <SubMenu className="user" title={userTitle} key="user">
+        <RoleItem key="d" allow_roles={["CONFIRM"]} onClick={() => router.push(`/statistic/${this.props.user.username}`)}>个人题数统计</RoleItem> 
         <Item key="a" onClick={() => router.push('/setting')}>用户中心</Item>
-        {/* <Item key="b">修改密码</Item> */}
+        {/* <RoleComponent( */}
+        <RoleItem key="b" allow_roles={["ADMIN"]} onClick={() => router.push('/admin')}>管理后台</RoleItem>
+        {/* ) /> */}
         <Item key="c" onClick={() => this.props.dispatch({ type: "user/logout" })}>登出</Item>
       </SubMenu>):
       (<SubMenu  className="user" title={userTitle} key="user">
@@ -136,18 +168,18 @@ class Header extends React.Component {
   }
 }
 function mapStateToProps(state) {
-  let { username, nick, role } = state.user;
+  let { username, nick, roles } = state.user;
   return {
     select_id: state.nav.select_id,
 
     user: {
-      username, nick, role
+      username, nick, roles
     }
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch: dispatch
+    dispatch: dispatch,
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

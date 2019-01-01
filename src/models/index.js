@@ -6,7 +6,7 @@ export default {
   namespace: 'user',
   state: {
     username: null,
-    role: null,
+    roles: [],
     login_state: null,
     message: null,
   },
@@ -17,8 +17,8 @@ export default {
       message = message || "登录成功";
       return { ...state, username, role, login_state, message };
     },
-    setUserSession(state, { payload: { username, nick }}) {
-      return { ...state, username, nick };
+    setUserSession(state, { payload: { username, nick, roles }}) {
+      return { ...state, username, nick, roles };
     }
   },
   effects: {
@@ -54,8 +54,8 @@ export default {
     },
     *session({}, {call, put }) {
       try {
-        const { username, nick } = yield call(Services.session);
-        yield put({ type: 'setUserSession', payload: { username, nick } });
+        const { username, nick, roles } = yield call(Services.session);
+        yield put({ type: 'setUserSession', payload: { username, nick, roles } });
         // router.push('/');
     } catch (e){
         console.log(e);

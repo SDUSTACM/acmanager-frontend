@@ -1,6 +1,6 @@
 import SiderBarLayout from './SiderBarLayout';
 export default function(props) {
-    const menu_config = [
+    const user_menu_config = [
         {
             "title": "申请通知",
             "target": "/message/application",
@@ -15,6 +15,19 @@ export default function(props) {
             "icon": "user",
         }*/
     ];
+    const admin_menu_config = [
+        {
+            "title": "审核通知",
+            "target": "/message/audit",
+            "icon": "user"
+        }
+    ];
+    let menu_config;
+    if (!props.is_admin) {
+        menu_config = admin_menu_config;
+    } else {
+        menu_config = user_menu_config;
+    }
     return (
         <SiderBarLayout menu_config={menu_config} {...props} />
     );

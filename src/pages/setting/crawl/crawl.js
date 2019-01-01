@@ -151,7 +151,7 @@ class RegistrationForm extends React.Component {
           )}
         >
           {getFieldDecorator('uva.password', {
-            rules: [{ required: true, message: 'Please input your nickname!', whitespace: true }],
+            rules: [{ required: false, message: 'Please input your nickname!', whitespace: true }],
           })(
             <Input />
           )}
@@ -185,7 +185,7 @@ class RegistrationForm extends React.Component {
           )}
         >
           {getFieldDecorator('vjudge.password', {
-            rules: [{ required: true, message: 'Please input your nickname!', whitespace: true }],
+            rules: [{ required: false, message: 'Please input your nickname!', whitespace: true }],
           })(
             <Input />
           )}

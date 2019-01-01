@@ -274,7 +274,7 @@ export const Footer10DataSource = {
         },
         content: {
           className: 'slogan',
-          children: 'Animation specification and components of Ant Design.',
+          children: '山东科技大学ACM管理系统',
         },
       },
       {

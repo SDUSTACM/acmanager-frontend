@@ -60,7 +60,7 @@ export default class Home extends React.Component {
         dataSource={Nav10DataSource}
         isMobile={this.state.isMobile}
       />
-      <div style={{minHeight:"100px"}}>
+      <div style={{minHeight:270}}>
       {this.props.children}
       </div>
       <Footer1

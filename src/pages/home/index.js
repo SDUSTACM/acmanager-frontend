@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from './home.css';
 import { Card, List, Row, Col } from 'antd';
 const data = [
     {
