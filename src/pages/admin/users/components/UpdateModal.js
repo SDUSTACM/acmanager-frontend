@@ -1,8 +1,88 @@
 import React from 'react';
 import { Button, Modal, Form, Input, Radio } from 'antd';
+import { Checkbox } from 'antd-mobile';
 
 const FormItem = Form.Item;
+class RoleCheckboxGroup extends React.Component {
+  static getDerivedStateFromProps(nextProps) {
+    if ('value' in nextProps) {
+      let state = {
+        selected_confirm: false,
+        selected_admin: false,
+        selected_user_admin: false,
+      };
+      if (nextProps.value.includes('CONFIRM')) {
+        state["selected_confirm"] = true;
+      } 
+      if (nextProps.value.includes('ADMIN')) {
+        state["selected_admin"] = true;
+      }
+      if (nextProps.value.includes('USER-ADMIN')) {
+        state["selected_user_admin"] = true;
+      }
+      return {
+        ...(state),
+      };
+    }
+    return null;
+  }
 
+  constructor(props) {
+    super(props);
+
+
+    this.state = {
+      selected_confirm: null,
+      selected_admin: null,
+      selected_user_admin: null,
+    };
+  }
+  
+  triggerChange = (changedValue) => {
+    // Should provide an event to pass value to Form.
+    const onChange = this.props.onChange;
+    const state = {...this.state, ...changedValue}; // 一定要将changedValue写后边，之前的setState什么时间执行时未知的
+    if (onChange) {
+      let roles = [];
+      if (state.selected_confirm) {
+        roles.push("CONFIRM");
+      }
+      if (state.selected_admin) {
+        roles.push("ADMIN");
+      }
+      if (state.selected_user_admin) {
+        roles.push("USER-ADMIN");
+      }
+      onChange(roles); 
+    }
+  }
+
+  render() {
+    const { value, dispatch } = this.props;
+    const { state } = this;
+    
+    const {
+      selected_confirm,
+      selected_admin,
+      selected_user_admin
+    } = this.state;
+    return (
+      <div>
+        <Checkbox checked={selected_confirm}  onChange={(e) => 
+          this.triggerChange({selected_confirm: e.target.checked})
+      }  >认证用户</Checkbox>
+        <Checkbox checked={selected_admin} onChange={(e) => 
+          this.triggerChange({selected_admin: e.target.checked})
+        
+      } >管理员</Checkbox>
+        <Checkbox checked={selected_user_admin} onChange={(e) => 
+          this.triggerChange({selected_user_admin: e.target.checked})
+        
+      } >用户管理员</Checkbox>
+      </div>
+    );
+  }
+}
 const CollectionCreateForm = Form.create({
     mapPropsToFields(props) {
         if (!props.data) return {};
@@ -16,6 +96,9 @@ const CollectionCreateForm = Form.create({
         class_name: Form.createFormField({
           value: props.data.class_name,
         }),
+        roles: Form.createFormField({
+          value: [...props.data.roles]
+        })
       };
     },
   })(
@@ -45,16 +128,13 @@ const CollectionCreateForm = Form.create({
             <FormItem label="班级">
               {getFieldDecorator('class_name')(<Input type="textarea" />)}
             </FormItem>
-            {/* <FormItem className="collection-create-form_last-form-item">
-              {getFieldDecorator('modifier', {
-                initialValue: 'public',
+            <FormItem label="所属角色" className="collection-create-form_last-form-item">
+              {getFieldDecorator('roles', {
+                initialValue: ["CONFIRM"],
               })(
-                <Radio.Group>
-                  <Radio value="public">Public</Radio>
-                  <Radio value="private">Private</Radio>
-                </Radio.Group>
+                <RoleCheckboxGroup {...this.props} />
               )}
-            </FormItem> */}
+            </FormItem>
           </Form>
         </Modal>
       );

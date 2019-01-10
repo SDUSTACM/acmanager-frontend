@@ -53,6 +53,7 @@ export default {
     *crawl_oj_data( { payload: { username }}, { call, put }) {
       try {
         yield call(Services.crawl_oj_data, username);
+        yield put({ type: 'get_solve_statistic_person', payload: { username } });
         message.success("更新成功!");
       } catch(e) {
         message.error("更新失败!");

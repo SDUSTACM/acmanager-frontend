@@ -109,6 +109,7 @@ class Header extends React.Component {
       </SubMenu>):
       (<SubMenu  className="user" title={userTitle} key="user">
         <Item key="a" onClick={() => router.push("/login") } >登录</Item>
+        <Item key="a" onClick={() => router.push("/register") } >注册</Item>
       </SubMenu>)
 
     );

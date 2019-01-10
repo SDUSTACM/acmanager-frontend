@@ -45,16 +45,6 @@ const CollectionCreateForm = Form.create({
             <FormItem label="班级">
               {getFieldDecorator('class_name')(<Input type="textarea" />)}
             </FormItem>
-            {/* <FormItem className="collection-create-form_last-form-item">
-              {getFieldDecorator('modifier', {
-                initialValue: 'public',
-              })(
-                <Radio.Group>
-                  <Radio value="public">Public</Radio>
-                  <Radio value="private">Private</Radio>
-                </Radio.Group>
-              )}
-            </FormItem> */}
           </Form>
         </Modal>
       );

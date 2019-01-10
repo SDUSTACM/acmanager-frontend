@@ -1,6 +1,7 @@
 import Services from './service';
 import router from 'umi/router';
 import { userInfo } from 'os';
+import { message } from 'antd';
 
 export default {
   namespace: 'users',
@@ -36,14 +37,16 @@ export default {
       }
     },
 
-    *update({ payload: { id, username, nick, class_name }}, {call, put}) {
+    *update({ payload: { id, username, nick, class_name, roles }}, {call, put}) {
       try {
         console.log(id, username, nick, class_name);
-        const data = yield call(Services.update_user, {id, username, nick, class_name} );
+        const data = yield call(Services.update_user, {id, username, nick, class_name, roles} );
         yield put({ type: 'get_user_list'});
-      //   router.push('/');
+        message.success("修改成功");
+        //   router.push('/');
       } catch (e){
-          console.log(e);
+        console.log(e);
+        message.success("修改失败");
         //   yield put({ type: 'set_userLoginState', payload: { username, login_state: 0, message: e.message } });
       }
     }

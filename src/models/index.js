@@ -39,9 +39,12 @@ export default {
       try {
           console.log(username, password, profile );
           yield call(Services.register, { username, password, profile });
+          message.success("注册成功，正在跳转");
           router.push('/');
-      } catch (e){
+          
+        } catch (e){
           console.log(e);
+          message.success("注册失败");
           // yield put({ type: 'setUserLoginState', payload: { username, login_state: 0, message: e.message } });
       }
     },
