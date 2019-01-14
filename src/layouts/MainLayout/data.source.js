@@ -6,7 +6,7 @@ export const Nav10DataSource = {
   page: { className: 'home-page' },
   logo: {
     className: 'header1-logo',
-    children: 'http://pkhnup3fo.bkt.clouddn.com/acmanager-logo.svg',
+    children: '//cdn.92ac.cn/acmanager-logo.svg',
   },
   Menu: {
     className: 'header1-menu',
@@ -270,7 +270,7 @@ export const Footer10DataSource = {
         title: {
           className: 'logo',
           children:
-            'http://pkhnup3fo.bkt.clouddn.com/acmanager-logo.svg',
+            '//cdn.92ac.cn/acmanager-logo.svg',
         },
         content: {
           className: 'slogan',
@@ -360,7 +360,7 @@ export const Footer10DataSource = {
     className: 'copyright',
     children: (
       <span>
-        ©2018 by sdkdACM team All Rights
+        ©2018-2019 by sdkdACM team All Rights
         Reserved
       </span>
     ),
