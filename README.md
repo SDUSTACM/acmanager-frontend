@@ -1,4 +1,5 @@
 # ACManager 新版前端
+[![Build Status](https://travis-ci.org/SDUSTACM/acmanager-frontend.svg?branch=master)](https://travis-ci.org/SDUSTACM/acmanager-frontend)
 ## 0. 所需软件、工具、依赖
 - [git](https://git-scm.com/download/win) 版本控制工具
 - [node](https://nodejs.org/zh-cn/) JavaScript运行时
