@@ -1,0 +1,22 @@
+language: node_js
+node_js:
+  - "stable"
+cache:
+  directories:
+    - node_modules
+script:
+  - npm test
+  - npm run build
+before_deploy:
+  - zip -r build.zip ./dist
+deploy:
+  provider: releases
+  api_key:
+    secure: QIQVX+mryRkWdfEAuV55gv/VJILVys+7eY1u8BYQQzUXTwgUMj+d5YHzueavYeyNkMnt9PIS87bS3U31j043G4BD6YogJbfO9GAn//TJpcmbHIqQGwxQQeFjcDZ8x/COYBTCs8un/BczAUfuaxQwWEt82P5bt0I8xASn0HlXAZtoiczQvzs7DOwkLHCl+W2rHUOhmGx3W3QHi/jcM8SGYJrSNA75aA454cpNVDpyK0fSKHnTTANTtrg9vTAtJbmXMrB8+rek6yznH5y+hRSkfjwTZQ1O/QWRP3ShJ48QIhRJid62aoPQxKQg4xaPUkFRZTHB80kU5cIXZBe7fs0KJZuyf6WpW2gsOQf0pkt3GzRLFOQqTUSJCt9aOPp5YzhLg3s0EnGT8N/KWOOOEQaXe//+RuOTWpGYKSwMZ/1k4rsWOuF+2eOBltx9DTx+wzzr2ClL8027fdKBJMZIVGPMRkESmc5tA0TE2utmxxyMaccrB3qbBlEab/i/o9Yv3ybbJYSLVrsFT2TwOE6idcIXyTic00xX70x257UoG3XrkC3NLFoSyzMeZ7eOYuIpdjzvfTfDD7dvPoQqrwE8vNLotBgS90Sb/tQCh8q1mNLMTgX9rdb76FyaUf/XW2Bigkx3qq+3oW1YvAkU98RA4uz/9STKzdya/AjdwiuR8ZNrqAg=
+  file: "build.zip"
+  skip_cleanup: true
+  on:
+    tags: true
+    repo: SDUSTACM/acmanager-frontend
+on:
+  branch: master
