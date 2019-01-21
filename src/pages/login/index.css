@@ -17,5 +17,10 @@
   justify-content: center;
   align-items: center;
   height: 100%;
-  background-image: url('https://blogs.ethz.ch/acmicpc/files/2017/12/header-1.jpg')
+  width :100%;
+  background-position: center 0;
+  background-size: cover;
+  background-image: url('https://blogs.ethz.ch/acmicpc/files/2017/12/header-1.jpg');
+  /*background-image: url('http://i2.hdslb.com/bfs/archive/13afd9527f8014e94e45ced977f1a0b59ccf44cb.jpg');*/
+  /*background-repeat: no-repeat;*/
 }

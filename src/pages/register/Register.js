@@ -9,6 +9,7 @@ const AutoCompleteOption = AutoComplete.Option;
 
 
 class RegistrationForm extends React.Component {
+
   state = {
     confirmDirty: false,
     autoCompleteResult: [],
@@ -50,11 +51,12 @@ class RegistrationForm extends React.Component {
     callback();
   }
 
-
+//渲染
   render() {
     const { getFieldDecorator } = this.props.form;
     const { autoCompleteResult } = this.state;
 
+    //formItem css 
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -62,9 +64,10 @@ class RegistrationForm extends React.Component {
       },
       wrapperCol: {
         xs: { span: 24 },
-        sm: { span: 16 },
+        sm: { span: 10},
       },
     };
+    //保存按钮 css
     const tailFormItemLayout = {
       wrapperCol: {
         xs: {
@@ -77,13 +80,16 @@ class RegistrationForm extends React.Component {
         },
       },
     };
-
+//xs : extra small 最小屏
+//sm : small 小屏
+//md : middle 中屏 lg : large 大屏
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSubmit} >
         <FormItem
           {...formItemLayout}
-          label="用户名"
+          label="用户名" 
         >
+
           {getFieldDecorator('username', {
             rules: [{
               required: true, message: '请输入用户名',
@@ -91,6 +97,7 @@ class RegistrationForm extends React.Component {
           })(
             <Input />
           )}
+
         </FormItem>
         <FormItem
           {...formItemLayout}

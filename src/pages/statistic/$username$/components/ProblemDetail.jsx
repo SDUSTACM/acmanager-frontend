@@ -47,6 +47,7 @@ class ProblemDetail extends React.Component {
         }
       }]
 
+      //colmuns[0] colmuns[1]  colmuns[2]
     render() {
         return (
              <Card>

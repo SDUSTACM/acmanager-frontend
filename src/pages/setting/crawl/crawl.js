@@ -6,8 +6,9 @@ import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Butto
 const FormItem = Form.Item;
 const Option = Select.Option;
 const AutoCompleteOption = AutoComplete.Option;
-
-const residences = [{
+//抓题管理 账号绑定 uva vj
+//crawl 爬虫
+/* const residences = [{
   value: 'zhejiang',
   label: 'Zhejiang',
   children: [{
@@ -29,7 +30,7 @@ const residences = [{
       label: 'Zhong Hua Men',
     }],
   }],
-}];
+}]; */
 
 class RegistrationForm extends React.Component {
   state = {
@@ -65,29 +66,29 @@ class RegistrationForm extends React.Component {
     });
   }
 
-  handleConfirmBlur = (e) => {
+  /* handleConfirmBlur = (e) => {
     const value = e.target.value;
     this.setState({ confirmDirty: this.state.confirmDirty || !!value });
-  }
+  } */
 
-  compareToFirstPassword = (rule, value, callback) => {
+ /*  compareToFirstPassword = (rule, value, callback) => {
     const form = this.props.form;
     if (value && value !== form.getFieldValue('password')) {
       callback('Two passwords that you enter is inconsistent!');
     } else {
       callback();
     }
-  }
+  } */
 
-  validateToNextPassword = (rule, value, callback) => {
+ /*  validateToNextPassword = (rule, value, callback) => {
     const form = this.props.form;
     if (value && this.state.confirmDirty) {
       form.validateFields(['confirm'], { force: true });
     }
     callback();
-  }
+  } */
 
-  handleWebsiteChange = (value) => {
+  /* handleWebsiteChange = (value) => {
     let autoCompleteResult;
     if (!value) {
       autoCompleteResult = [];
@@ -95,7 +96,7 @@ class RegistrationForm extends React.Component {
       autoCompleteResult = ['.com', '.org', '.net'].map(domain => `${value}${domain}`);
     }
     this.setState({ autoCompleteResult });
-  }
+  } */
 
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -131,7 +132,7 @@ class RegistrationForm extends React.Component {
           label={(
             <span>
               UVA账号&nbsp;
-              <Tooltip title="请输出UVA ID">
+              <Tooltip title="请输入UVA ID">
                 <Icon type="question-circle-o" />
               </Tooltip>
             </span>
@@ -148,7 +149,7 @@ class RegistrationForm extends React.Component {
           label={(
             <span>
               UVA密码&nbsp;
-              <Tooltip title="请输出UVA 密码">
+              <Tooltip title="请输入UVA 密码">
                 <Icon type="question-circle-o" />
               </Tooltip>
             </span>
@@ -164,8 +165,8 @@ class RegistrationForm extends React.Component {
           {...formItemLayout}
           label={(
             <span>
-              Vjudge账号
-              <Tooltip title="请输出Vjudge账号">
+              Vjudge账号&nbsp;
+              <Tooltip title="请输入Vjudge账号">
                 <Icon type="question-circle-o" />
               </Tooltip>
             </span>
@@ -181,8 +182,8 @@ class RegistrationForm extends React.Component {
           {...formItemLayout}
           label={(
             <span>
-              Vjudge密码
-              <Tooltip title="请输出Vjudge密码">
+              Vjudge密码&nbsp;
+              <Tooltip title="请输入Vjudge密码">
                 <Icon type="question-circle-o" />
               </Tooltip>
             </span>
@@ -201,6 +202,8 @@ class RegistrationForm extends React.Component {
     );
   }
 }
+
+
 
 const WrappedRegistrationForm = Form.create({
   mapPropsToFields(props) {
