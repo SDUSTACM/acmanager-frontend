@@ -5,7 +5,7 @@ import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Butto
 const FormItem = Form.Item;
 const Option = Select.Option;
 const AutoCompleteOption = AutoComplete.Option;
-
+//我猜这是ant 上面的一个模板组件。。。应该没大用
 const residences = [{
   value: 'zhejiang',
   label: 'Zhejiang',

@@ -8,7 +8,7 @@ const Option = Select.Option;
 const AutoCompleteOption = AutoComplete.Option;
 
 
-
+//reset your password 密码修改
 class RepasswordForm extends React.Component {
   state = {
     confirmDirty: false,
@@ -67,6 +67,7 @@ class RepasswordForm extends React.Component {
         md: { span: 8 },
       },
     };
+
     const tailFormItemLayout = {
       wrapperCol: {
         xs: {
@@ -95,14 +96,7 @@ class RepasswordForm extends React.Component {
         </FormItem>
         <FormItem
           {...formItemLayout}
-          label={(
-            <span>
-              新密码
-              <Tooltip title="What do you want others to call you?">
-                <Icon type="question-circle-o" />
-              </Tooltip>
-            </span>
-          )}
+          label="新密码"
         >
           {getFieldDecorator('new_password', {
             rules: [{
@@ -116,14 +110,7 @@ class RepasswordForm extends React.Component {
         </FormItem>
         <FormItem
           {...formItemLayout}
-          label={(
-            <span>
-              确认密码
-              <Tooltip title="What do you want others to call you?">
-                <Icon type="question-circle-o" />
-              </Tooltip>
-            </span>
-          )}
+          label="确认密码"
         >
           {getFieldDecorator('new_password1', {
             rules: [{

@@ -7,17 +7,18 @@ const FormItem = Form.Item;
 const Option = Select.Option;
 const AutoCompleteOption = AutoComplete.Option;
 
-
+//个人信息
+// 用户名 状态 姓名 班级
 class ConfirmInput extends React.Component {
-  // static getDerivedStateFromProps(nextProps) {
-  //   // Should be a controlled component.
-  //   if ('value' in nextProps) {
-  //     return {
-  //       ...(nextProps.value || {}),
-  //     };
-  //   }
-  //   return null;
-  // }
+ /*  static getDerivedStateFromProps(nextProps) {
+    // Should be a controlled component.
+    if ('value' in nextProps) {
+      return {
+        ...(nextProps.value || {}),
+      };
+    }
+    return null;
+  } */
 
   constructor(props) {
     super(props);
@@ -138,7 +139,14 @@ class RegistrationForm extends React.Component {
       <Form onSubmit={this.handleSubmit}>
         <FormItem
           {...formItemLayout}
-          label="用户名"
+          label={(
+            <span>
+              用户名&nbsp;
+              <Tooltip title="Your username.">
+                <Icon type="question-circle-o" />
+              </Tooltip>
+            </span>
+          )}
         >
           {getFieldDecorator('username', {
             rules: [ {
@@ -153,7 +161,7 @@ class RegistrationForm extends React.Component {
           label={(
             <span>
               状态&nbsp;
-              <Tooltip title="What do you want others to call you?">
+              <Tooltip title="Your status.">
                 <Icon type="question-circle-o" />
               </Tooltip>
             </span>
@@ -170,7 +178,7 @@ class RegistrationForm extends React.Component {
           label={(
             <span>
               姓名&nbsp;
-              <Tooltip title="What do you want others to call you?">
+              <Tooltip title="Your real name.">
                 <Icon type="question-circle-o" />
               </Tooltip>
             </span>
@@ -187,7 +195,7 @@ class RegistrationForm extends React.Component {
           label={(
             <span>
               班级&nbsp;
-              <Tooltip title="What do you want others to call you?">
+              <Tooltip title="Your Professional Class.">
                 <Icon type="question-circle-o" />
               </Tooltip>
             </span>
