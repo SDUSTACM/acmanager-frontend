@@ -40,7 +40,8 @@ class ProblemDetail extends React.Component {
                     //    row["solve_problem"].includes(item)?
                     //   <Tag color="green">{item}</Tag>
                     //   :
-                      <Tag color="magenta">{item}</Tag>
+                      <Tag color="magenta" ><a href={'https://vjudge.net/problem/'+item} >{item}</a></Tag>
+                      //哼，你就是这个链接
                       
                 ))}</div>
             );
@@ -67,6 +68,8 @@ class ProblemDetail extends React.Component {
         );
     }
 }
+
+
 function mapStateToProps(state) {
     return {
         data: state.statistic.detail,
