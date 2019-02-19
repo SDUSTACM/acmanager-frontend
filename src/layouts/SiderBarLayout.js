@@ -99,7 +99,7 @@ class SiderDemo extends React.Component {
                 onClick={this.toggle}
               />
             </Header>
-            <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 500 }}>
+            <Content style={{display:"flex", margin: '24px 16px', padding: 24, background: '#fff', minHeight: 500 }}>
               {this.props.children }
             </Content>
           </Layout>

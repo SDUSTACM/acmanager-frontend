@@ -1,13 +1,18 @@
 import React from 'react';
 import { Card, List, Row, Col } from 'antd';
-const data = [
-    {
-        title: 'ACManager alphav0.1发布！',
-        author: "wzh",
-        time: "2018-12-29"
-    },
-  ];
+import { connect } from 'dva';
+import router from 'umi/router';
+
+
 class Index extends React.Component {
+    navigateToAnnouncement = (id) => {
+        router.push(`/announcement/${id}`)
+    }
+    componentDidMount() {
+        this.props.dispatch({
+            type: "announcement/get_announcement_list"
+        })
+    }
     render() {
         return (
             <Card>
@@ -16,13 +21,13 @@ class Index extends React.Component {
                         // header={<div>Header</div>}
                         // footer={<div>Footer</div>}
                         bordered
-                        dataSource={data}
+                        dataSource={this.props.data}
                         renderItem={item => (
                             <List.Item>
                                 <Row style={{width:'100%'}}>
-                                    <Col span={16}>{item.title}</Col>
-                                    <Col span={4}>{item.time}</Col>
-                                    <Col span={4}>{item.author}</Col>
+                                    <Col span={16}><a href="javascript:;" onClick={() => this.navigateToAnnouncement(item.id)}>{item.title}</a></Col>
+                                    <Col span={4}>{item.create_time}</Col>
+                                    <Col span={4}>{item.user}</Col>
                                 </Row>
                             </List.Item>
                         )}
@@ -32,4 +37,9 @@ class Index extends React.Component {
         );
     }
 }
-export default Index;
+function mapStateToProps(state) {
+    return {
+        data: state.announcement.announcement_list
+    };
+}
+export default connect(mapStateToProps)(Index);

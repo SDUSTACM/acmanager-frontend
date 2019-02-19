@@ -7,6 +7,11 @@ export default function(props) {
             "icon": "user",
             "key": "user-manager"
         }, {
+            "title": "公告管理",
+            "target": "/admin/announcements",
+            "icon": "user",
+            "key": "announcement-manager"
+        } ,{
             "title": "集训管理",
             "target": "/admin/training",
             "icon": "user",
