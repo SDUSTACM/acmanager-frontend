@@ -49,7 +49,23 @@ class SiderDemo extends React.Component {
       collapsed: !this.state.collapsed,
     });
   }
-
+  renderMenuItem (items) {
+    return items.map((item) => (
+      item.children?
+        (<Menu.SubMenu key={item.key} title={(<div>
+              <Icon type={item.icon} />
+              <span>{item.title}</span></div>)
+            }>
+          {this.renderMenuItem(item.children)}
+        </Menu.SubMenu>
+        ):
+        <Menu.Item key={item.key} onClick={()=> router.push(item.target) }>
+          <Icon type={item.icon} />
+          <span>{item.title}</span>
+        </Menu.Item>
+    )
+    )
+  }
   render() {
     return (
       <div
@@ -72,21 +88,7 @@ class SiderDemo extends React.Component {
           >
             <div className="logo" />
             <Menu theme="dark" mode="inline" defaultSelectedKeys={[this.props.select_id]}>
-              {this.props.menu_config.map((item, index) => (
-                <Menu.Item key={index} onClick={()=> router.push(item.target) }>
-                  <Icon type={item.icon} />
-                  <span>{item.title}</span>
-                </Menu.Item>
-              ))}
-              {/* 
-              <Menu.Item key="2">
-                <Icon type="video-camera" />
-                <span>nav 2</span>
-              </Menu.Item>
-              <Menu.Item key="3">
-                <Icon type="upload" />
-                <span>nav 3</span>
-              </Menu.Item> */}
+              {this.renderMenuItem(this.props.menu_config)}
             </Menu>
           </Sider>
           <Layout>
@@ -97,7 +99,7 @@ class SiderDemo extends React.Component {
                 onClick={this.toggle}
               />
             </Header>
-            <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 500 }}>
+            <Content style={{display:"flex", margin: '24px 16px', padding: 24, background: '#fff', minHeight: 500 }}>
               {this.props.children }
             </Content>
           </Layout>
