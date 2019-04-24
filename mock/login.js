@@ -25,7 +25,7 @@ export default {
     //         "role": "root"
     //     });
     // },
-    // 'GET /api/logout': (req, res) => {
-    //     res.status(204).send();
-    // }
+    'GET /tmpapi/xxxx': (req, res) => {
+        res.status(200).send({"message": "Helloworld"});
+    }
   };

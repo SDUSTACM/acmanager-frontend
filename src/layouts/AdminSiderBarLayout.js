@@ -13,10 +13,10 @@ export default function(props) {
             "key": "announcement-manager"
         } ,{
             "title": "集训管理",
-            "target": "/admin/training",
+            "target": "/admin/trainings",
             "icon": "user",
             "key": "training-manager",
-            "children": [
+            /* "children": [
                 {
                     "title": "比赛管理",
                     "target": "/admin/users",
@@ -31,13 +31,13 @@ export default function(props) {
                 },
                 {
                     "title": "阶段管理",
-                    "target": "/admin/users",
+                    "target": "/admin/trainings/stages",
                     "icon": "user",
                     "key": "training-stage-manager",
                     "children": [
                         {
                             "title": "参数管理",
-                            "target": "/admin/users",
+                            "target": "/admin/trainings/stages",
                             "icon": "user",
                             "key": "training-stage-param-manager",
                         },
@@ -49,12 +49,8 @@ export default function(props) {
                         },
                     ]
                 },
-        ]
-        }/*, {
-            "title": "申请管理",
-            "target": "/admin/application",
-            "icon": "user"
-        }*/
+        ]*/
+        }
     ];
     return (
         <SiderBarLayout menu_config={menu_config} {...props} />

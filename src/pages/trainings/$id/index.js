@@ -6,7 +6,7 @@ import router from 'umi/router';
 // import UpdatePage from './components/UpdateModal';
 
 
-class TrainingListPage extends React.Component {
+class RoundListPage extends React.Component {
     
     constructor(props) {
         super(props);
@@ -15,15 +15,23 @@ class TrainingListPage extends React.Component {
             select_data: null
         }
     }
+    componentDidMount() {
+        const { id } = this.props.match.params;
+
+        this.props.dispatch({
+            type: 'trainings/get_round_list',
+            payload: { training_id: id }
+        })
+    }
     columns = [{
         title: '编号',
         dataIndex: 'id',
         key: 'id',
     },{
-        title: '集训名',
+        title: '轮次',
         dataIndex: 'name',
         key: 'name',
-        render: (text, record) => <a href="javascript:;" onClick={() => router.push(`/trainings/${record.id}`) }>{text}</a>,
+        render: (text, record) => <a href="javascript:;" onClick={() => router.push(`${this.props.pathname}/rounds/${record.id}`) }>{text}</a>,
       }, {
         title: '说明',
         dataIndex: 'description',
@@ -55,7 +63,7 @@ class TrainingListPage extends React.Component {
             <a href="javascript:;" onClick={() => this.setState({
                 visible: true,
                 select_data: record
-            })}>加入集训</a>
+            })}>加入轮次</a>
             <Divider type="vertical" />
             <a href="javascript:;">Delete</a>
           </span>
@@ -81,7 +89,8 @@ class TrainingListPage extends React.Component {
 }
 function mapStateToProps(state) {
     return {
-        data: state.trainings.training_list
+        data: state.trainings.training_rounds_list,
+        pathname: state.routing.location.pathname
     };
 }
-export default connect(mapStateToProps)(TrainingListPage);
+export default connect(mapStateToProps)(RoundListPage);
